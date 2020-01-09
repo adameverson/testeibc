@@ -22,3 +22,28 @@ Deverá ser entregue rodando na AWS (Free Tier) juntamente com todo o código no G
 ### Considerações
 A ideia desse projeto é testar suas habilidades mais proximo o possível e nossa realidade.
 Esse teste deverá ser executado com no maximo uma semana (7 dias) a partir de agora.
+
+# README do projeto
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
