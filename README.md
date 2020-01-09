@@ -1,7 +1,7 @@
 # testeibc
-## Realizado por Adam Everson\n
-### Iniciado em: 08/01/2020 (início do dia)\n
-### Estimativa de entrega: 14/01/2020 (fim do dia)\n
+### Realizado por Adam Everson
+  - Iniciado em: 08/01/2020 (início do dia)
+  - Estimativa de entrega: 14/01/2020 (fim do dia)
 
 # IBC descrição do teste
 #### O teste:
