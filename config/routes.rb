@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :boards
   get 'welcome/index'
 
   # adicionado
-  root 'welcome#index'
+  root 'boards#index'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
