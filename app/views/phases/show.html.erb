@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Boards', boards_path %> |
+<%= link_to 'Phases', phases_path %>
+
+<p>
+  <strong>Id phase:</strong>
+  <%= @phase.id %> |
+  <strong>Id board:</strong>
+  <%= @phase.id_board %>
+  <h1> <%= @phase.name %> </h1>
+</p>
+
+<%= link_to 'Edit', edit_phase_path(@phase) %>

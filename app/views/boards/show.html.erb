@@ -1,9 +1,39 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Boards', boards_path %>
+
 <p>
-  <strong>Name:</strong>
-  <%= @board.name %>
+  <strong>Id board:</strong>
+  <%= @board.id %>
+  <h1> <%= @board.name %> </h1>
 </p>
 
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
+<%= link_to 'Edit', edit_board_path(@board) %>
+
+<h1>Phases</h1>
+
+<%= link_to 'New Phase', new_phase_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id phase</th>
+      <th>Name</th>
+      <th>Id board</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |phase| %>
+      <tr>
+        <td><%= phase["id"] %></td>
+        <td><%= phase["name"] %></td>
+        <td><%= phase["id_board"] %></td>
+        <td><%= link_to 'Edit', edit_phase_path(phase["id"]) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
