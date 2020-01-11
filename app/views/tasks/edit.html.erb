@@ -2,8 +2,8 @@
 <%= link_to 'Phases', phases_path %> |
 <%= link_to 'Tasks', tasks_path %>
 
-<h1>New Board</h1>
+<h1>Editing Task</h1>
 
-<%= render 'form', board: @board %>
+<%= render 'form', task: @task %>
 
-<%= link_to 'Back', boards_path %>
+<%= link_to 'Show', @task %>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Boards', boards_path %> |
+<%= link_to 'Phases', phases_path %>
+
+<h1>Tasks</h1>
+
+<%= link_to 'New Task', new_task_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id task</th>
+      <th>Task</th>
+      <th>Id phase</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.task %></td>
+        <td><%= task.id_phase %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

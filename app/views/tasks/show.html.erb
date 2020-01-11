@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Boards', boards_path %> |
+<%= link_to 'Phases', phases_path %> |
+<%= link_to 'Tasks', tasks_path %>
+
+<p>
+<p>
+  <strong>Id task:</strong>
+  <%= @task.id %> |
+  <strong>Id phase:</strong>
+  <%= @task.id_phase %>
+  <h1> <%= @task.task %> </h1>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %>
