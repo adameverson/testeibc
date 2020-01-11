@@ -18,14 +18,20 @@
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
+    <% ActiveRecord::Base.connection.exec_query("select * from tasks order by id_phase").each do |task| %>
       <tr>
-        <td><%= task.id %></td>
-        <td><%= task.task %></td>
-        <td><%= task.id_phase %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= task["id"] %></td>
+        <td><%= task["task"] %></td>
+        <td><%= task["id_phase"] %></td>
+        <% @tasks.each do |task2| 
+          if task2.id == task["id"]
+        %>
+            <td><%= link_to 'Show', task2 %></td>
+            <td><%= link_to 'Edit', edit_task_path(task2) %></td>
+            <td><%= link_to 'Destroy', task2, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
+          <% end
+        end %>
       </tr>
     <% end %>
   </tbody>

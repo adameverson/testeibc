@@ -23,7 +23,7 @@
     <tr>
       <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |i| %>
         <th nowrap>Id phase</th>
-        <th>Name</th>
+        <th>Phase</th>
         <th nowrap>Id board</th>
         <th colspan="2"></th>
       <% end %>
