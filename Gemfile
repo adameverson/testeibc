@@ -6,6 +6,8 @@ ruby '2.6.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
+# Bootstrap
+gem 'bootstrap', '~> 4.4.1'
 
 # Heroku
 gem 'pg', group: :production

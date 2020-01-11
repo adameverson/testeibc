@@ -1,8 +1,14 @@
 <% @title="New Task" %>
 
-<%= link_to 'Boards', boards_path %> |
-<%= link_to 'Phases', phases_path %> |
-<%= link_to 'Tasks', tasks_path %>
+<div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Boards', boards_path, :class => "btn" %>
+</div>
+<div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Phases', phases_path, :class => "btn" %>
+</div>
+<div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Tasks', tasks_path, :class => "btn" %>
+</div>
 
 <h1>New Task</h1>
 
