@@ -46,7 +46,7 @@ end %>
       <% end %>
     </tr>
     <tr>
-      <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |phase| %>        
+      <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase| %>        
         <td><%= phase["id"] %></td>
         <td nowrap><%= phase["name"] %></td>
         <td><%= link_to 'Edit', edit_phase_path(phase["id"]) %></td>
