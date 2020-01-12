@@ -13,12 +13,8 @@
 </div>
 
 <p>
-<p>
-  <strong>Id task:</strong>
-  <%= @task.id %> |
-  <strong>Id phase:</strong>
-  <%= @task.id_phase %>
   <h1> <%= @task.task %> </h1>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %>
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Destroy', @task, method: :delete, data: { confirm: 'Are you sure?' } %>

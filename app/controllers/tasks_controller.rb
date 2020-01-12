@@ -10,6 +10,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    $task_url = @task
   end
 
   # GET /tasks/new
@@ -28,7 +29,15 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        if $board_url
+          format.html { redirect_to $board_url, notice: 'Task was successfully created.' }
+        else 
+          if $phase_url
+            format.html { redirect_to $phase_url, notice: 'Task was successfully created.' }
+          else
+            format.html { redirect_to tasks_url, notice: 'Task was successfully created.' }
+          end
+        end
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -42,7 +51,19 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        if $board_url
+          format.html { redirect_to $board_url, notice: 'Task was successfully updated.' }
+        else 
+          if $phase_url
+            format.html { redirect_to $phase_url, notice: 'Task was successfully updated.' }
+          else
+            if $task_url
+              format.html { redirect_to $task_url, notice: 'Task was successfully updated.' }
+            else
+              format.html { redirect_to tasks_url, notice: 'Task was successfully updated.' }
+            end
+          end
+        end
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -56,7 +77,15 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      if $board_url
+        format.html { redirect_to $board_url, notice: 'Task was successfully destroyed.' }
+      else 
+        if $phase_url
+          format.html { redirect_to $phase_url, notice: 'Task was successfully destroyed.' }
+        else
+          format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+        end
+      end
       format.json { head :no_content }
     end
   end

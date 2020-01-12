@@ -10,6 +10,7 @@ class PhasesController < ApplicationController
   # GET /phases/1
   # GET /phases/1.json
   def show
+    $phase_url = @phase
   end
 
   # GET /phases/new
@@ -28,7 +29,11 @@ class PhasesController < ApplicationController
 
     respond_to do |format|
       if @phase.save
-        format.html { redirect_to @phase, notice: 'Phase was successfully created.' }
+        if $board_url
+          format.html { redirect_to $board_url, notice: 'Phase was successfully created.' }
+        else
+          format.html { redirect_to @phase, notice: 'Phase was successfully created.' }
+        end
         format.json { render :show, status: :created, location: @phase }
       else
         format.html { render :new }
@@ -42,7 +47,11 @@ class PhasesController < ApplicationController
   def update
     respond_to do |format|
       if @phase.update(phase_params)
-        format.html { redirect_to  @phase, notice: 'Phase was successfully updated.' }
+        if $board_url
+          format.html { redirect_to  $board_url, notice: 'Phase was successfully updated.' }
+        else
+          format.html { redirect_to  @phase, notice: 'Phase was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @phase }
       else
         format.html { render :edit }
@@ -56,7 +65,11 @@ class PhasesController < ApplicationController
   def destroy
     @phase.destroy
     respond_to do |format|
-      format.html { redirect_to phases_url, notice: 'Phase was successfully destroyed.' }
+      if $board_url
+        format.html { redirect_to $board_url, notice: 'Phase was successfully destroyed.' }
+      else
+        format.html { redirect_to phases_url, notice: 'Phase was successfully destroyed.' }
+      end
       format.json { head :no_content }
     end
   end

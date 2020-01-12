@@ -14,13 +14,12 @@
 
 <p>
   <strong>Id phase:</strong>
-  <%= @phase.id %> |
-  <strong>Id board:</strong>
-  <%= @phase.id_board %>
+  <%= @phase.id %>
   <h1> <%= @phase.name %> </h1>
 </p>
 
-<%= link_to 'Edit', edit_phase_path(@phase) %>
+<%= link_to 'Edit', edit_phase_path(@phase) %> |
+<%= link_to 'Destroy', @phase, method: :delete, data: { confirm: 'Are you sure?' } %>
 <br>
 
 <div class="btn btn-outline-info btn-sm">
@@ -31,7 +30,6 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Id</th>
       <th>Task</th>
       <th>Id phase</th>
       <th colspan="3"></th>
@@ -41,7 +39,6 @@
   <tbody>
     <% ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{@phase.id}").each do |task| %>
       <tr>
-        <td><%= task["id"] %></td>
         <td><%= task["task"] %></td>
         <td><%= task["id_phase"] %></td>
         <td><%= link_to 'Edit', edit_task_path(task["id"]) %></td>
