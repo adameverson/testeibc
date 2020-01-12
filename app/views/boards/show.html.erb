@@ -62,7 +62,7 @@ end %>
     <% tasks = [] 
     pha = 0 %>
     <tr>
-      <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |phase| i=0
+      <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase| i=0
         ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{phase["id"]} order by id").each do |task| i=1  
           if pha != task["id_phase"] %>
             <td></td>
