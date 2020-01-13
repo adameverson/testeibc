@@ -8,6 +8,7 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 
 # Bootstrap
 gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
 
 # Heroku
 gem 'pg', group: :production
