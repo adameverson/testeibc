@@ -10,12 +10,15 @@ class PhasesController < ApplicationController
   # GET /phases/1
   # GET /phases/1.json
   def show
-    $phase_url = @phase
+    # $phase_url = @phase
   end
 
   # GET /phases/new
   def new
     @phase = Phase.new
+    if $board_url
+      @phase.id_board = $board_url.id
+    end
   end
 
   # GET /phases/1/edit

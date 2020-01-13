@@ -16,6 +16,10 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @task.id_phase = $phase_begin
+    # if $phase_url
+      # @task.id_phase = $phase_url.id
+    # end
   end
 
   # GET /tasks/1/edit

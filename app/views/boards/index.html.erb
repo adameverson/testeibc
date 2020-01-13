@@ -2,24 +2,28 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="btn btn-outline-info btn-sm">
-  <%= link_to 'Phases', phases_path, :class => "btn" %>
-</div>
-<div class="btn btn-outline-info btn-sm">
-  <%= link_to 'Tasks', tasks_path, :class => "btn" %>
-</div>
+<div align="right">
+  <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Phases', phases_path, :class => "btn" %>
+  </div>
+  <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Tasks', tasks_path, :class => "btn" %>
+  </div>
+</di>
 
-<h1>Boards</h1>
+<div align="left">
+  <!--<h1>Boards</h1>-->
 
-<div class="btn btn-outline-info btn-sm">
-  <%= link_to 'New', new_board_path, :class => "btn" %>
+  <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'New Board', new_board_path, :class => "btn" %>
+  </div>
 </div>
-<h1></h1>
+<h6></h6>
 
-<table class="table table-bordered">
+<table class="table">
   <thead>
     <tr>
-      <th colspan="4">Board</th>
+      <th colspan="2">Board</th>
     </tr>
   </thead>
 
@@ -27,9 +31,15 @@
     <% @boards.each do |board| %>
       <tr>
         <td><%= board.name %></td>
-        <td><%= link_to 'Show', board %></td>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="btn btn-outline-info btn-sm">
+            <%= link_to 'Show', board, :class => "btn" %>
+          </div>
+          <div class="btn btn-outline-info btn-sm">
+            <%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %>
+          </div>
+        </td>
+        <!-- <td><%= link_to 'Edit', edit_board_path(board) %></td> -->
       </tr>
     <% end %>
   </tbody>

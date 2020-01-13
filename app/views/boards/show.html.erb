@@ -3,6 +3,16 @@
 <p id="notice"><%= notice %></p>
 
 <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Back', boards_path, :class => "btn" %>
+</div>
+<div class="btn btn-outline-info btn-sm">
+  <%= link_to 'Edit', edit_board_path(@board), :class => "btn" %>
+</div>
+<div class="btn btn-outline-info btn-sm">
+  <%= link_to 'Destroy', @board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %>
+</div>
+<!--
+<div class="btn btn-outline-info btn-sm">
     <%= link_to 'Boards', boards_path, :class => "btn" %>
 </div>
 <div class="btn btn-outline-info btn-sm">
@@ -11,23 +21,25 @@
 <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Tasks', tasks_path, :class => "btn" %>
 </div>
+-->
 
 <p>
+  <!--
   <strong>Id board:</strong>
   <%= @board.id %>
-  <h1> <%= @board.name %> </h1>
+  -->
+  <h6> <%= @board.name %> </h6>
 </p>
 
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Destroy', @board, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-<h1>Phases</h1>
+<!-- <h1>Phases</h1> -->
 
 <div class="btn btn-outline-info btn-sm">
   <%= link_to 'New Phase', new_phase_path, :class => "btn" %>
 </div>
-<% $condition = false
-ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |i|
+<% $phase_begin = 0
+$condition = false
+ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase|
+  $phase_begin = phase["id"]
   $condition = true
   break
 end %>
@@ -36,18 +48,19 @@ end %>
 </div>
 <h1></h1>
 
-<table class="table table-bordered">
-  <tbody>
+<!--<div class="container-fluid" style="width:1200px; height:424px; overflow:auto;">-->
+<table class="table">
+  <thead>
 
     <tr>
       <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id}").each do |i| %>
-        <th>Id</th>
+        <th><!--Id--></th>
         <th colspan="3">Phase</th>
       <% end %>
     </tr>
     <tr>
       <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase| %>        
-        <td><%= phase["id"] %></td>
+        <td><!--<%= phase["id"] %>--></td>
         <td nowrap><%= phase["name"] %></td>
         <td><%= link_to 'Edit', edit_phase_path(phase["id"]) %></td>
         <td>>></td>
@@ -59,16 +72,104 @@ end %>
         <th colspan="3">Task</th>
       <%end %>
     </tr>
-    <% tasks = [] 
+
+  </thead>
+
+    <% 
+    id_phases_next = []
+    id_tasks_next = []
+    k = 0
+    l = 0
+    id_phases_prev = []
+    id_tasks_prev = []
+    m = 0
+    phase_id_prev = 0
+    tasks = []
+    pha = 0 
+    ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase|
+      while l != 0
+        id_phases_next[k-1] = phase["id"]
+        l = l - 1
+      end
+      ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{phase["id"]} order by id").each do |task|
+        if pha != task["id_phase"]  
+          id_phases_next.push(phase["id"])
+          id_tasks_next.push(task["id"])
+          k = k + 1
+          l = l + 1
+          id_phases_prev.push(phase["id"])
+          id_tasks_prev.push(task["id"])
+          m = m + 1
+          if phase_id_prev != 0
+            id_phases_prev[m-1] = phase_id_prev
+          end
+          pha = task["id_phase"]
+        else
+          tasks.push(task)
+        end
+      end
+      phase_id_prev = phase["id"]
+    end
+    while !tasks.empty?
+      phase_id_prev = 0
+      l = 0
+      pha = 0
+      ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase|
+        j=0
+        while l != 0
+          id_phases_next[k-1] = phase["id"]
+          l = l - 1
+        end
+        for task in tasks  
+          if pha != task["id_phase"] && phase["id"] == task["id_phase"]
+            id_phases_next.push(phase["id"])
+            id_tasks_next.push(task["id"])
+            k = k + 1
+            l = l + 1
+            id_phases_prev.push(phase["id"])
+            id_tasks_prev.push(task["id"])
+            m = m + 1
+            if phase_id_prev != 0
+              id_phases_prev[m-1] = phase_id_prev
+            end
+            pha = task["id_phase"] 
+            tasks.delete_at(j)
+          end
+          j = j + 1
+        end
+        phase_id_prev = phase["id"]
+      end
+    end
+    k = 0
+    m = 0
+    tasks = [] 
     pha = 0 %>
+
+  <tbody>
+
     <tr>
       <% ActiveRecord::Base.connection.exec_query("select * from phases where id_board=#{@board.id} order by id").each do |phase| i=0
         ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{phase["id"]} order by id").each do |task| i=1  
           if pha != task["id_phase"] %>
-            <td></td>
+            <td>
+              <form action="/boards/updatephasetask" method="post">
+                <input type="hidden" id="phaseId" name="phaseId" value=<%=id_phases_prev[m]%> >
+                <input type="hidden" id="taskId" name="taskId" value=<%=id_tasks_prev[m]%> >
+                <button type="submit" formmethod="post"><<</button>
+              </form>
+            </td>
             <td nowrap><%= task["task"] %></td>
-            <td colspan="2"><%= link_to 'Edit', edit_task_path(task["id"]) %></td>
-            <% pha = task["id_phase"] 
+            <td colspan="1"><%= link_to 'Edit', edit_task_path(task["id"]) %></td>
+            <td>
+            <form action="/boards/updatephasetask" method="post">
+              <input type="hidden" id="phaseId" name="phaseId" value=<%=id_phases_next[k]%> >
+              <input type="hidden" id="taskId" name="taskId" value=<%=id_tasks_next[k]%> >
+              <button type="submit" formmethod="post">>></button>
+            </form>
+            </td>
+            <% k = k + 1
+            m = m + 1
+            pha = task["id_phase"] 
           else
             tasks.push(task)
           end
@@ -87,10 +188,25 @@ end %>
           j=0
           for task in tasks  
             if pha != task["id_phase"] && phase["id"] == task["id_phase"] %>
-              <td></td>
+              <td>
+                <form action="/boards/updatephasetask" method="post">
+                  <input type="hidden" id="phaseId" name="phaseId" value=<%=id_phases_prev[m]%> >
+                  <input type="hidden" id="taskId" name="taskId" value=<%=id_tasks_prev[m]%> >
+                  <button type="submit" formmethod="post"><<</button>
+                </form>
+              </td>
               <td nowrap><%= task["task"] %></td>
-              <td colspan="2"><%= link_to 'Edit', edit_task_path(task["id"]) %></td>
-              <% pha = task["id_phase"] 
+              <td colspan="1"><%= link_to 'Edit', edit_task_path(task["id"]) %></td>
+              <td>
+                <form action="/boards/updatephasetask" method="post">
+                  <input type="hidden" id="phaseId" name="phaseId" value=<%=id_phases_next[k]%> >
+                  <input type="hidden" id="taskId" name="taskId" value=<%=id_tasks_next[k]%> >
+                  <button type="submit" formmethod="post">>></button>
+                </form>
+              </td>
+              <% k = k + 1
+              m = m + 1
+              pha = task["id_phase"] 
               tasks.delete_at(j)
               i=1
             end

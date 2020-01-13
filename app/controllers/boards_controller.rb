@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only:[:updatephasetask]
 
   # GET /boards
   # GET /boards.json
@@ -60,6 +61,12 @@ class BoardsController < ApplicationController
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # Update phase task
+  def updatephasetask
+    ActiveRecord::Base.connection.exec_query("update tasks set id_phase=#{params[:phaseId]} where id=#{params[:taskId]}")
+    redirect_to $board_url
   end
 
   private

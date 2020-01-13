@@ -1,18 +1,27 @@
 <% @title="Editing Task" %>
 
 <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Back', $board_url, :class => "btn" %>
+</div>
+<div class="btn btn-outline-info btn-sm">
     <%= link_to 'Boards', boards_path, :class => "btn" %>
 </div>
+<div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Destroy', @task, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %>
+</div>
+<!--
 <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Phases', phases_path, :class => "btn" %>
 </div>
 <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Tasks', tasks_path, :class => "btn" %>
 </div>
+-->
 
-<h1>Editing Task</h1>
+<p>
+    <h5>Editing Task</h5>
+</p>
 
 <%= render 'form', task: @task %>
 
-<%= link_to 'Show', @task %> |
-<%= link_to 'Destroy', @task, method: :delete, data: { confirm: 'Are you sure?' } %>
+<!-- <%= link_to 'Show', @task %> | -->

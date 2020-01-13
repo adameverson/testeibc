@@ -1,6 +1,10 @@
 <% @title="New Board" %>
 
 <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Back', boards_path, :class => "btn" %>
+</div>
+<!--
+<div class="btn btn-outline-info btn-sm">
     <%= link_to 'Boards', boards_path, :class => "btn" %>
 </div>
 <div class="btn btn-outline-info btn-sm">
@@ -9,9 +13,12 @@
 <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Tasks', tasks_path, :class => "btn" %>
 </div>
+-->
 
-<h1>New Board</h1>
+<p>
+    <h5>New Board</h5>
+</p>
 
 <%= render 'form', board: @board %>
 
-<%= link_to 'Back', boards_path %>
+
