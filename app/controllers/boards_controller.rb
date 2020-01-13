@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token, only:[:updatephasetask]
+  before_action :authenticate_user!
 
   # GET /boards
   # GET /boards.json
