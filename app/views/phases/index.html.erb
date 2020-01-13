@@ -35,7 +35,7 @@
 
   <tbody>
     
-    <% ActiveRecord::Base.connection.exec_query("select * from phases order by id_board").each do |phase| %>
+    <% ActiveRecord::Base.connection.exec_query("select * from phases order by id_board, id").each do |phase| %>
       <tr>
         <td><%= phase["name"] %></td>
         <!--<td><%= phase["id_board"] %></td>-->
