@@ -6,28 +6,26 @@ $task_url = nil %>
 
 <p id="notice"><%= notice %></p>
 
-<div align="right">
+<div style="float:right;">
   <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Boards', boards_path, :class => "btn" %>
   </div>
   <div class="btn btn-outline-info btn-sm">
     <%= link_to 'Phases', phases_path, :class => "btn" %>
   </div>
+  <div class="btn btn-outline-info btn-sm">
+    <%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => "btn" %>
+  </div>
+  <h6></h6>
 </div>
 
-<!--
-<div align="left">
-  <h1>Tasks</h1>
-</div>
--->
+<!--<h1>Tasks</h1>-->
 
 <!--
 <div class="btn btn-outline-info btn-sm">
   <%= link_to 'New', new_task_path, :class => "btn" %>
 </div>
 -->
-
-<h6></h6>
 
 <table class="table">
   <thead>
