@@ -121,11 +121,11 @@ def id_phases_next(posicao)
         end
         for task in tasks  
             if pha != task["id_phase"] && phase["id"] == task["id_phase"]
-            id_phases_next.push(phase["id"])
-            k = k + 1
-            l = l + 1
-            pha = task["id_phase"] 
-            tasks.delete_at(j)
+                id_phases_next.push(phase["id"])
+                k = k + 1
+                l = l + 1
+                pha = task["id_phase"] 
+                tasks.delete_at(j)
             end
             j = j + 1
         end
