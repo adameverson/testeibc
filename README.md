@@ -1,4 +1,4 @@
-# TESTE IBC realizado por Adam Everson
+﻿# TESTE IBC realizado por Adam Everson
 
 * App TODO LIST semelhante ao Trello
 
@@ -7,6 +7,9 @@
 # DEPLOY
 
 https://murmuring-fjord-81104.herokuapp.com/
+(Pode demorar para carregar na primeira requisição, é só esperar o carregamento)  
+
+O Deploy não foi realizado no AWS (Free Tier) Elastic Beanstalk pois na hora de migrar o banco de dados no RDS Aurora, o sistema poderia aderir a um plano pago.
 
 # FEATURES
 
