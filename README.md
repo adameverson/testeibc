@@ -13,6 +13,8 @@ O Deploy não foi realizado no AWS (Free Tier) Elastic Beanstalk pois na hora de
 
 # FEATURES
 
+* Confirmação por email na criação do usuário e recuperação de senha por email
+
 * Configuração de cores ou temas por usuário
 
 * Globalização (vários idiomas)
