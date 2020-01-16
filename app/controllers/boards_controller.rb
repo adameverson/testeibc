@@ -18,6 +18,7 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
+    @board.user_email = current_user.email
   end
 
   # GET /boards/1/edit
@@ -78,6 +79,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:name)
+      params.require(:board).permit(:name, :user_email)
     end
 end

@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_224908) do
+ActiveRecord::Schema.define(version: 2020_01_15_222952) do
 
   create_table "boards", force: :cascade do |t|
     t.string "name"
+    t.string "user_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -21,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_224908) do
   create_table "phases", force: :cascade do |t|
     t.string "name"
     t.integer "id_board"
+    t.string "user_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_224908) do
   create_table "tasks", force: :cascade do |t|
     t.text "task"
     t.integer "id_phase"
+    t.string "user_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

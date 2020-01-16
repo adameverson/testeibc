@@ -5,11 +5,13 @@ RSpec.describe "tasks/index", type: :view do
     assign(:tasks, [
       Task.create!(
         :task => "MyText",
-        :id_phase => 2
+        :id_phase => 2,
+        :user_email => "User Email"
       ),
       Task.create!(
         :task => "MyText",
-        :id_phase => 2
+        :id_phase => 2,
+        :user_email => "User Email"
       )
     ])
   end
@@ -18,5 +20,6 @@ RSpec.describe "tasks/index", type: :view do
     render
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
     assert_select "tr>td", :text => 2.to_s, :count => 2
+    assert_select "tr>td", :text => "User Email".to_s, :count => 2
   end
 end

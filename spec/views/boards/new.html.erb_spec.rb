@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "boards/new", type: :view do
   before(:each) do
     assign(:board, Board.new(
-      :name => "MyString"
+      :name => "MyString",
+      :user_email => "MyString"
     ))
   end
 
@@ -13,6 +14,8 @@ RSpec.describe "boards/new", type: :view do
     assert_select "form[action=?][method=?]", boards_path, "post" do
 
       assert_select "input[name=?]", "board[name]"
+
+      assert_select "input[name=?]", "board[user_email]"
     end
   end
 end

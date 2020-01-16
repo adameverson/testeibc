@@ -13,8 +13,6 @@ O Deploy não foi realizado no AWS (Free Tier) Elastic Beanstalk pois na hora de
 
 # FEATURES
 
-* Associar um workspace para cada usuário
-
 * Configuração de cores ou temas por usuário
 
 * Globalização (vários idiomas)

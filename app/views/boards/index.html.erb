@@ -29,20 +29,24 @@
   </thead>
 
   <tbody>
-    <% @boards.each do |board| %>
-      <tr>
-        <td><%= board.name %></td>
-        <td>
-          <div class="btn btn-outline-info btn-sm">
-            <%= link_to 'Show', board, :class => "btn" %>
-          </div>
-          <div class="btn btn-outline-info btn-sm">
-            <%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %>
-          </div>
-        </td>
-        <!-- <td><%= link_to 'Edit', edit_board_path(board) %></td> -->
-      </tr>
-    <% end %>
+    <% ActiveRecord::Base.connection.exec_query("select * from boards where user_email='#{current_user.email}'").each do |board2|
+      @boards.each do |board| 
+        if board.id == board2["id"] %>
+          <tr>
+            <td><%= board.name %></td>
+            <td>
+              <div class="btn btn-outline-info btn-sm">
+                <%= link_to 'Show', board, :class => "btn" %>
+              </div>
+              <div class="btn btn-outline-info btn-sm">
+                <%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %>
+              </div>
+            </td>
+            <!-- <td><%= link_to 'Edit', edit_board_path(board) %></td> -->
+          </tr>
+        <% end
+      end 
+    end %>
   </tbody>
 </table>
 

@@ -36,7 +36,7 @@ $task_url = nil %>
   </thead>
 
   <tbody>
-    <% ActiveRecord::Base.connection.exec_query("select * from tasks order by id_phase, id").each do |task| %>
+    <% ActiveRecord::Base.connection.exec_query("select * from tasks where user_email='#{current_user.email}' order by id_phase, id").each do |task| %>
       <tr>
         <td><%= task["task"] %></td>
         <!--<td><%= task["id_phase"] %></td>-->

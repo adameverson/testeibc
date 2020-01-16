@@ -4,7 +4,8 @@ RSpec.describe "tasks/new", type: :view do
   before(:each) do
     assign(:task, Task.new(
       :task => "MyText",
-      :id_phase => 1
+      :id_phase => 1,
+      :user_email => "MyString"
     ))
   end
 
@@ -16,6 +17,8 @@ RSpec.describe "tasks/new", type: :view do
       assert_select "textarea[name=?]", "task[task]"
 
       assert_select "input[name=?]", "task[id_phase]"
+
+      assert_select "input[name=?]", "task[user_email]"
     end
   end
 end

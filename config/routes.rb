@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
   resources :tasks
   resources :phases
   resources :boards
+  devise_for :users
   get 'welcome/index'
 
   # adicionado

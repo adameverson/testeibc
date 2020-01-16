@@ -51,7 +51,7 @@
   </thead>
 
   <tbody>
-    <% ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{@phase.id}").each do |task| %>
+    <% ActiveRecord::Base.connection.exec_query("select * from tasks where id_phase=#{@phase.id} and user_email='#{current_user.email}'").each do |task| %>
       <tr>
         <td><%= task["task"] %></td>
         <!-- <td><%= task["id_phase"] %></td> -->

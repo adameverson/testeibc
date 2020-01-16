@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -21,6 +21,7 @@ class TasksController < ApplicationController
     # if $phase_url
       # @task.id_phase = $phase_url.id
     # end
+    @task.user_email = current_user.email
   end
 
   # GET /tasks/1/edit
@@ -103,6 +104,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:task, :id_phase)
+      params.require(:task).permit(:task, :id_phase, :user_email)
     end
 end

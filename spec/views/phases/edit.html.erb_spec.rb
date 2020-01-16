@@ -4,7 +4,8 @@ RSpec.describe "phases/edit", type: :view do
   before(:each) do
     @phase = assign(:phase, Phase.create!(
       :name => "MyString",
-      :id_board => 1
+      :id_board => 1,
+      :user_email => "MyString"
     ))
   end
 
@@ -16,6 +17,8 @@ RSpec.describe "phases/edit", type: :view do
       assert_select "input[name=?]", "phase[name]"
 
       assert_select "input[name=?]", "phase[id_board]"
+
+      assert_select "input[name=?]", "phase[user_email]"
     end
   end
 end

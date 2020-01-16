@@ -5,11 +5,13 @@ RSpec.describe "phases/index", type: :view do
     assign(:phases, [
       Phase.create!(
         :name => "Name",
-        :id_board => 2
+        :id_board => 2,
+        :user_email => "User Email"
       ),
       Phase.create!(
         :name => "Name",
-        :id_board => 2
+        :id_board => 2,
+        :user_email => "User Email"
       )
     ])
   end
@@ -18,5 +20,6 @@ RSpec.describe "phases/index", type: :view do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => 2.to_s, :count => 2
+    assert_select "tr>td", :text => "User Email".to_s, :count => 2
   end
 end

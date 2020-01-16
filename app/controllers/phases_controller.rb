@@ -1,7 +1,7 @@
 class PhasesController < ApplicationController
   before_action :set_phase, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+
   # GET /phases
   # GET /phases.json
   def index
@@ -20,6 +20,7 @@ class PhasesController < ApplicationController
     if $board_url
       @phase.id_board = $board_url.id
     end
+    @phase.user_email = current_user.email
   end
 
   # GET /phases/1/edit
@@ -86,6 +87,6 @@ class PhasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def phase_params
-      params.require(:phase).permit(:name, :id_board)
+      params.require(:phase).permit(:name, :id_board, :user_email)
     end
 end
